@@ -4,17 +4,18 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.annotation.StringRes
+import android.support.constraint.ConstraintLayout
+import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
+import com.redmadrobot.inputmask.MaskedTextChangedListener
 import kazanexpress.ru.javahack.ui.profile_details.MainActivity
 import kazanexpress.ru.javahack.R
 
@@ -27,10 +28,14 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
-        val username = findViewById<EditText>(R.id.username)
+        val username = findViewById<TextInputEditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
+        val welcomeText = findViewById<TextView>(R.id.welcomeText)
+        val container = findViewById<ConstraintLayout>(R.id.container)
+
+        container.requestFocus()
 
         loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
                 .get(LoginViewModel::class.java)
@@ -63,12 +68,14 @@ class LoginActivity : AppCompatActivity() {
 
         })
 
-        username.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                    username.text.toString(),
-                    password.text.toString()
-            )
-        }
+        username.addTextChangedListener(MaskedTextChangedListener("+7 ([000]) [000] [00] [00]", username, object : MaskedTextChangedListener.ValueListener {
+            override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
+                loginViewModel.loginDataChanged(
+                        extractedValue,
+                        password.text.toString()
+                )
+            }
+        }))
 
         password.apply {
             afterTextChanged {
@@ -80,11 +87,13 @@ class LoginActivity : AppCompatActivity() {
 
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
+                    EditorInfo.IME_ACTION_DONE -> {
+                        loading.visibility = View.VISIBLE
                         loginViewModel.login(
                                 username.text.toString(),
                                 password.text.toString()
                         )
+                    }
                 }
                 false
             }
@@ -93,6 +102,8 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
+
+            welcomeText.typeface = Typeface.createFromAsset(assets, "fonts/FuturaNewDemi.otf")
         }
     }
 
