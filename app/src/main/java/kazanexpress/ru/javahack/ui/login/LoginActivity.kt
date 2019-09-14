@@ -16,7 +16,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
 import com.redmadrobot.inputmask.MaskedTextChangedListener
-import kazanexpress.ru.javahack.ui.profile_details.MainActivity
+import kazanexpress.ru.javahack.ui.info.CaptureDocImageActivity
 import kazanexpress.ru.javahack.R
 
 class LoginActivity : AppCompatActivity() {
@@ -123,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, CaptureDocImageActivity::class.java))
         finish()
     }
 }

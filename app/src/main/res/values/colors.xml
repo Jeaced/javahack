@@ -6,4 +6,5 @@
     <color name="appWhite">#FFFFFF</color>
     <color name="gray">#7F7F7F</color>
     <color name="yellow">#FFED00</color>
+    <color name="photoGray">#E5E5E5</color>
 </resources>

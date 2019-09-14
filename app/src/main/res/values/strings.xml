@@ -3,6 +3,8 @@
     <string name="shared_preferences">ru.hardcoders.shared_preferences</string>
     <string name="title_activity_login">Войти</string>
     <string name="action_sign_in">Войти</string>
+    <string name="action_capture">Распознать</string>
+    <string name="action_accept">Подтвердить</string>
     <string name="action_sign_in_short">Войти</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Не валидный номер телефона</string>
