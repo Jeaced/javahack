@@ -6,7 +6,9 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.widget.SwipeRefreshLayout
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import kazanexpress.ru.javahack.R
@@ -31,8 +33,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         signOutButton = findViewById(R.id.signOutButton)
         loginRepository = LoginRepository(LoginDataSource())
-
-        swipeRefreshLayout = SwipeRefreshLayout(this)
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh)
         amountAvailableView = findViewById(R.id.amountAvailable)
         amountOnHoldView = findViewById(R.id.amountOnHold)
         amountAvailableView.typeface = Typeface.createFromAsset(assets, "fonts/FuturaNewDemi.otf")
@@ -42,11 +43,11 @@ class ProfileActivity : AppCompatActivity() {
                 .get(ProfileViewModel::class.java)
         profileViewModel.getClientData().observe(this, Observer { userData ->
             updateUI(userData!!)
+            Log.e("VM", "UPDATE PRISHEL")
         })
 
         swipeRefreshLayout.setOnRefreshListener {
             profileViewModel.update()
-            swipeRefreshLayout.isRefreshing = false
         }
 
         signOutButton.setOnClickListener {

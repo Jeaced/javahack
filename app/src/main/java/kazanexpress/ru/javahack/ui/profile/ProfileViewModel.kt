@@ -33,12 +33,15 @@ class ProfileViewModel(private val loginRepository: LoginRepository) : ViewModel
     }
 
     fun update() {
+        Log.e("FSF", "FASF")
         // can be launched in a separate asynchronous job
         if (token == null) {
+            Log.e("token", "null")
             return
         }
         doAsync {
             val result = restApiService.getClientInfo(token!!).execute()
+            Log.e("VM", result.code().toString())
             uiThread {
                 if (result.isSuccessful) {
                     clientData.value = result.body()!!
