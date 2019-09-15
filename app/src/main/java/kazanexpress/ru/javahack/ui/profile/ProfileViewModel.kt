@@ -29,7 +29,6 @@ class ProfileViewModel(private val loginRepository: LoginRepository) : ViewModel
         val user = loginRepository.user
         if (user != null) {
             token = user.accessToken
-            Log.d("token", token)
         }
     }
 
@@ -40,7 +39,6 @@ class ProfileViewModel(private val loginRepository: LoginRepository) : ViewModel
         }
         doAsync {
             val result = restApiService.getClientInfo(token!!).execute()
-            Log.d("clientResult", result.code().toString())
             uiThread {
                 if (result.isSuccessful) {
                     clientData.value = result.body()!!

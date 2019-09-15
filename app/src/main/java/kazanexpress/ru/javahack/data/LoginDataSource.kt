@@ -18,7 +18,6 @@ class LoginDataSource {
         try {
             val restApiService = RestApiService.getInstance()!!
             val response = restApiService.signIn(CredentialsDto(password, username)).execute()
-            Log.d("login", response.code().toString())
             if (response.isSuccessful) {
                 val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "Eugene Levin", response.body()!!.token, "")
                 return Result.Success(fakeUser)

@@ -63,5 +63,6 @@ class ProfileActivity : AppCompatActivity() {
     private fun updateUI(userData: ClientInfoResponse) {
         amountOnHoldView.text = "${userData.lockedAmount} ₽"
         amountAvailableView.text = "${userData.availableAmount} ₽"
+        swipeRefreshLayout.isRefreshing = false
     }
 }

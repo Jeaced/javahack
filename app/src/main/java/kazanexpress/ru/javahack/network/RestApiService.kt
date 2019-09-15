@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 interface RestApiService {
 
-    @GET("sign-in")//@POST("oauth/token?grant_type=password")
+    @POST("sign-in")//@POST("oauth/token?grant_type=password")
     fun signIn(@Body credentialsDto: CredentialsDto): Call<LoginResponse>
 
     @GET("client/info")
