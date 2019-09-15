@@ -1,5 +1,7 @@
 package kazanexpress.ru.javahack.data
 
+import android.util.Log
+import kazanexpress.ru.javahack.data.model.CredentialsDto
 import kazanexpress.ru.javahack.data.model.LoggedInUser
 import kazanexpress.ru.javahack.network.RestApiService
 import org.jetbrains.anko.doAsync
@@ -15,10 +17,10 @@ class LoginDataSource {
     fun login(username: String, password: String): Result<LoggedInUser> {
         try {
             val restApiService = RestApiService.getInstance()!!
-            val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "Eugene Levin", "", "")
-            val response = restApiService.signIn(username, password).execute()
-            if (true) {//response.isSuccessful) {
-                Thread.sleep(250)
+            val response = restApiService.signIn(CredentialsDto(password, username)).execute()
+            Log.d("login", response.code().toString())
+            if (response.isSuccessful) {
+                val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "Eugene Levin", response.body()!!.token, "")
                 return Result.Success(fakeUser)
             } else {
                 return Result.Error(IOException("Incorrect input data"))

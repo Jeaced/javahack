@@ -1,5 +1,8 @@
 package kazanexpress.ru.javahack.network
 
+import kazanexpress.ru.javahack.data.model.ClientInfoResponse
+import kazanexpress.ru.javahack.data.model.CredentialsDto
+import kazanexpress.ru.javahack.data.model.LoginResponse
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -11,10 +14,11 @@ import java.util.concurrent.TimeUnit
 
 interface RestApiService {
 
-    @Headers("Content-Type: application/x-www-form-urlencoded")
-    @GET("hi/greeting")//@POST("oauth/token?grant_type=password")
-    fun signIn(@Query("username") username: String,
-               @Query("password") password: String): Call<ResponseBody>
+    @GET("sign-in")//@POST("oauth/token?grant_type=password")
+    fun signIn(@Body credentialsDto: CredentialsDto): Call<LoginResponse>
+
+    @GET("client/info")
+    fun getClientInfo(@Query("token") token: String): Call<ClientInfoResponse>
 
     companion object {
 
@@ -50,7 +54,7 @@ interface RestApiService {
                 if (INSTANCE == null) {
                     val retrofit = Retrofit.Builder()
                             .addConverterFactory(GsonConverterFactory.create())
-                            .baseUrl("http://10.91.5.98:8080/api/")
+                            .baseUrl("http://10.91.5.98:8080/")
                             .client(getClientInstance()!!)
                             .build()
 
