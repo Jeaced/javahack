@@ -1,4 +1,4 @@
-package kazanexpress.ru.javahack.ui.info
+package kazanexpress.ru.javahack.ui.mocked
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,10 +11,6 @@ import kazanexpress.ru.javahack.ui.login.LoginActivity
 
 
 class CaptureDocImageActivity : AppCompatActivity() {
-
-//    private lateinit var textView: TextView
-//    private lateinit var signOutButton: Button
-//    private lateinit var loginRepository: LoginRepository
     private lateinit var captureButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,39 +35,9 @@ class CaptureDocImageActivity : AppCompatActivity() {
             startActivity(Intent(this, FormsActivity::class.java))
         }
 
-//        textView = findViewById(R.id.textView)
-//        signOutButton = findViewById(R.id.signOutButton)
-//        loginRepository = LoginRepository(LoginDataSource())
-//
-//        signOutButton.setOnClickListener {
-//            loginRepository.logout()
-//            goToLoginActivity()
-//        }
-
-
-//        val restApiService = RestApiService.getInstance()!!
-//
-//
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val contextResult = restApiService.getGoogle()
-//            withContext(Dispatchers.Main) {
-//                textView.text = contextResult.code().toString()
-//            }
-//            val deferredResult = async {
-//                restApiService.getGoogle()
-//            }
-//            val result = deferredResult.await()
-//            Log.e("await", result.code().toString())
-//
-//        }
     }
 
     override fun onBackPressed() {
         moveTaskToBack(true)
-    }
-
-    private fun goToLoginActivity() {
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
     }
 }

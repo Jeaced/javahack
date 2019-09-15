@@ -1,13 +1,20 @@
 package kazanexpress.ru.javahack.network
 
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
+import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
 interface RestApiService {
+
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @GET("hi/greeting")//@POST("oauth/token?grant_type=password")
+    fun signIn(@Query("username") username: String,
+               @Query("password") password: String): Call<ResponseBody>
 
     companion object {
 
@@ -43,8 +50,7 @@ interface RestApiService {
                 if (INSTANCE == null) {
                     val retrofit = Retrofit.Builder()
                             .addConverterFactory(GsonConverterFactory.create())
-                            //.baseUrl("https://api.kazanexpress.ru/api/")
-                            .baseUrl("https://google.com")
+                            .baseUrl("http://10.91.5.98:8080/api/")
                             .client(getClientInstance()!!)
                             .build()
 

@@ -2,38 +2,38 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/appWhite"
     android:layout_width="match_parent"
+    android:background="@color/appWhite"
     android:layout_height="match_parent"
-    tools:context=".ui.mocked.FormsActivity">
-
+    tools:context=".ui.mocked.FormsActivity3">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/scan_results"
+        android:src="@mipmap/practice"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:elevation="0dp"/>
 
     <Button
-        android:id="@+id/accept"
+        android:id="@+id/finish"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="20dp"
         android:background="@drawable/sign_in_button"
         android:textColor="@color/colorAccent"
         style="?android:attr/borderlessButtonStyle"
         android:textAllCaps="false"
         android:textSize="14sp"
         android:enabled="true"
-        android:text="@string/action_accept"
+        android:text="@string/action_finish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:elevation="2dp" />
+
 </android.support.constraint.ConstraintLayout>

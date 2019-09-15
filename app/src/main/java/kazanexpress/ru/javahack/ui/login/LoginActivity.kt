@@ -16,7 +16,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
 import com.redmadrobot.inputmask.MaskedTextChangedListener
-import kazanexpress.ru.javahack.ui.info.CaptureDocImageActivity
+import kazanexpress.ru.javahack.ui.mocked.CaptureDocImageActivity
 import kazanexpress.ru.javahack.R
 
 class LoginActivity : AppCompatActivity() {
